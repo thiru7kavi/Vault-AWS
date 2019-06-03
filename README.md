@@ -56,6 +56,12 @@ git clone https://github.com/thiru7kavi/Vault-AWS.git
 
 ```
 cd Vault-AWS
+
+update variables.tf and environment varibales with AWS account and resource information 
+
+# AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY
+# AWS_DEFAULT_REGION
 ```
 
 3. Build and Deploy the stack
@@ -81,7 +87,14 @@ Vault on EC2, we have to consider the below tasks as maintenance activity.
      b. Kernel Patch \
      c. Security Patch \
      d. Setup Monitoring
-2. Request or Configure or review Periodic backup for DynamoDB
+2. Request or Configure or review Periodic backup for DynamoDB tables 
+3. Monitoring and alerting on audit metrics using cloud watch or ELK 
+4. Audit ACLs and Policies Periodically 
+5. Perform manual key rotation if necessary (Master key in KMS)
+6. Plan and Handle vault upgrades ,if any bug fixes or security fixes in future
+7. Integrate Continuous integration using Jenkins and test vault configs before pushing to Prod
+8. DR or Chaos Test to validate High availability
+
 
 
 
