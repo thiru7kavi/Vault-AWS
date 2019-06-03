@@ -72,5 +72,18 @@ trrrafrom apply
 
 ### Testing the stack
 
+### Maintenance : 
+
+Vault on EC2, we have to consider the below tasks as maintenance activity.
+
+1. Operating system maintenance for Vault nodes\
+     a. Filesystem \
+     b. Kernel Patch \
+     c. Security Patch \
+     d. Setup Monitoring
+2. Request or Configure or review Periodic backup for DynamoDB
+
+
+
 
 
