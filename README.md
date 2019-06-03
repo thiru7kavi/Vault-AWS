@@ -24,7 +24,7 @@ Here we are going to use
  2.Storage as AWS DynamoDB \
  3.Vault Hosted on EC2 Instances
 
-![Stack Overview](./docs/Vault.png)
+![Stack Overview](./docs/vault_new.png)
 
 ### Working Flow:
 
