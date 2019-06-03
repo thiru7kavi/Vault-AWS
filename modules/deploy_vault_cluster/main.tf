@@ -112,10 +112,6 @@ resource "aws_iam_instance_profile" "instance_profile" {
   name_prefix = "${var.cluster_name}"
   path        = "${var.instance_profile_path}"
   role        = "${aws_iam_role.instance_role.name}"
-
-  # aws_launch_configuration.launch_configuration in this module sets create_before_destroy to true, which means
-  # everything it depends on, including this resource, must set it as well, or you'll get cyclic dependency errors
-  # when you try to do a terraform destroy.
   lifecycle {
     create_before_destroy = true
   }
@@ -125,9 +121,6 @@ resource "aws_iam_role" "instance_role" {
   name_prefix        = "${var.cluster_name}"
   assume_role_policy = "${data.aws_iam_policy_document.instance_role.json}"
 
-  # aws_iam_instance_profile.instance_profile in this module sets create_before_destroy to true, which means
-  # everything it depends on, including this resource, must set it as well, or you'll get cyclic dependency errors
-  # when you try to do a terraform destroy.
   lifecycle {
     create_before_destroy = true
   }
@@ -145,7 +138,7 @@ data "aws_iam_policy_document" "instance_role" {
   }
 }
 
-resource "aws_dynamodb_table "dynamodb-table {
+resource "aws_dynamodb_table" "dynamodb-table" {
   name           = "${var.dynamoTable}"
   read_capacity  = 1
   write_capacity = 1
@@ -159,7 +152,7 @@ resource "aws_dynamodb_table "dynamodb-table {
         {
             name = "Key"
             type = "S"
-        }
+        } ]
   lifecycle {
     create_before_destroy = true
   }

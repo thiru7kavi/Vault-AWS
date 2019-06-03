@@ -4,24 +4,7 @@ terraform {
 }
 
 
-data "aws_ami" {
-  most_recent = true
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "is-public"
-    values = ["true"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["vault-linux-*"]
-  }
-}
 
 module "deploy_vault_cluster" {
 
@@ -30,7 +13,7 @@ module "deploy_vault_cluster" {
   cluster_size  = "${var.vault_cluster_size}"
   instance_type = "${var.vault_instance_type}"
 
-  ami_id    = "${var.ami_id == "" ? data.aws_ami.image_id : var.ami_id}"
+  ami_id    = "${var.ami_id}"
 
   vpc_id     = "${data.aws_vpc.default.id}"
   subnet_ids = "${data.aws_subnet_ids.default.ids}"
@@ -50,7 +33,7 @@ module "security_groups" {
 }
 
 module "elb" {
-  source = "./modules/vault-elb"
+  source = "./modules/elb"
   name = "${var.vault_cluster_name}"
   vpc_id     = "${data.aws_vpc.default.id}"
   subnet_ids = "${data.aws_subnet_ids.default.ids}"
